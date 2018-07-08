@@ -18,6 +18,10 @@ class Application
       @@cart.each do |item|
         resp.write "#{item}\n"
       end
+    elsif req.path.match(/add/)
+      item = req.params["q"]
+      handle_search(item)
+      @@cart << item unless !@@items.include?(item)
     else
       resp.write "Path Not Found"
     end
